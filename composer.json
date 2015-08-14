@@ -1,0 +1,23 @@
+{
+    "name": "mailxpert/php-sdk",
+    "description": "mailXpert SDK for PHP",
+    "keywords": ["mailxpert", "sdk", "php"],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/mailXpert/mailxpert-php-sdk",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "^6.0"
+    },
+    "suggest": {
+        "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client"
+    },
+    "authors": [
+        {
+            "name": "Jean-Christophe Cuvelier",
+            "email": "jcc@artack.ch"
+        }
+    ]
+}
