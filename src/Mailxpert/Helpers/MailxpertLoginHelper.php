@@ -7,6 +7,7 @@
 namespace Mailxpert\Helpers;
 
 
+use Mailxpert\Authentication\AccessToken;
 use Mailxpert\Authentication\OAuth2Client;
 
 class MailxpertLoginHelper
@@ -50,6 +51,10 @@ class MailxpertLoginHelper
         return $this->oAuth2Client->getAccessTokenFromCode($this->getCode(), $redirectUrl);
     }
 
+    public function refreshAccessToken(AccessToken $accessToken, $redirectUrl)
+    {
+        return $this->oAuth2Client->getAccessTokenFromAccessToken($accessToken, $redirectUrl);
+    }
 
     /**
      * Return the code.

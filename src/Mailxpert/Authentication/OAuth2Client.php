@@ -86,7 +86,19 @@ class OAuth2Client
         $params = [
             'code' => $code,
             'redirect_uri' => $redirectUrl,
-            'grant_type' => 'authorization_code',
+            'grant_type' => 'authorization_code'
+        ];
+
+        return $this->requestAccessToken($params);
+    }
+
+
+    public function getAccessTokenFromAccessToken(AccessToken $accessToken, $redirectUrl)
+    {
+        $params = [
+            'refresh_token' => $accessToken->getRefreshToken(),
+            'redirect_uri' => $redirectUrl,
+            'grant_type' => 'refresh_token'
         ];
 
         return $this->requestAccessToken($params);

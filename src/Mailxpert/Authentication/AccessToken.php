@@ -31,4 +31,9 @@ class AccessToken
     {
         return $this->accessToken;
     }
+
+    public function getRefreshToken()
+    {
+        return $this->refreshToken;
+    }
 }

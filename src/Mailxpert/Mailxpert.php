@@ -139,6 +139,14 @@ class Mailxpert
         $this->accessToken = $accessToken;
     }
 
+    /**
+     * @return AccessToken
+     */
+    public function getAccessToken()
+    {
+        return $this->accessToken;
+    }
+
     private function getOAuth2Client()
     {
         if (!$this->oAuth2Client instanceof OAuth2Client) {
