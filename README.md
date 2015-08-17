@@ -8,7 +8,7 @@ NOTE: This library is still considered as in alpha release. Although it is meant
 
 Install this package with composer:
 
-```
+```bash
 composer require mailxpert/php-sdk
 ```
 
@@ -20,7 +20,7 @@ You can check the ```examples/``` folders.
 
 The basic usage is the following:
 
-```
+```php
 $mailxpert = new Mailxpert([
     'app_id' => $appId,
     'app_secret' => $appSecret 
@@ -29,13 +29,13 @@ $mailxpert = new Mailxpert([
 
 ### Show the "Login with mailXpert" button
 
-```
+```php
 <a href="<?php echo $mailxpert->getLoginHelper()->getLoginUrl($redirectUrl); ?>">Login with mailXpert</a>
 ```
 
 ### Retrieve the access token from the code
 
-```
+```php
 if (isset($_REQUEST['code'])) {
     $accessToken = $mailxpert->getLoginHelper()->getAccessToken($redirectUrl);
 }
@@ -43,20 +43,20 @@ if (isset($_REQUEST['code'])) {
 
 ### Do a query with the access token
 
-```
-$data = json_deconde($mailxpert->sendRequest('GET','/contact_lists',[], $accessToken), true);
+```php
+$data = json_decode($mailxpert->sendRequest('GET','/contact_lists',[], $accessToken), true);
 $contactLists = $data['data'];
 ```
 
 Note: You can also set the access token for all your requests:
 
-```
+```php
 $mailxpert->setAccessToken($access_token);
 ```
 
 and then you can do any call like this:
 
-```
+```php
 $mailxpert->sendRequest('GET','/contact_lists');
 ```
 
@@ -65,4 +65,4 @@ $mailxpert->sendRequest('GET','/contact_lists');
 Made by ARTACK WebLab GmbH. Feel free to contribute or submit issues.
 
 
-*** Inspired from Facebook PHP SDK 4.0 [https://github.com/facebook/facebook-php-sdk-v4](https://github.com/facebook/facebook-php-sdk-v4) ***
+-- Inspired from Facebook PHP SDK 4.0 [https://github.com/facebook/facebook-php-sdk-v4](https://github.com/facebook/facebook-php-sdk-v4) --
