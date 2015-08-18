@@ -16,6 +16,8 @@ class OAuth2Client
 {
     const BASE_AUTHORIZATION_URL = 'https://v5.mailxpert.ch';
 
+    const REFRESH_TOKEN_VALIDITY = 31536000; // 365 days
+
     /**
      * @var MailxpertApp
      */
@@ -127,7 +129,9 @@ class OAuth2Client
             $expiresAt = time() + $data['expires_in'];
         }
 
-        return new AccessToken($data['access_token'], $data['refresh_token'], $expiresAt, $data['scope']);
+        $refreshTokenExpireAt = time() + static::REFRESH_TOKEN_VALIDITY;
+
+        return new AccessToken($data['access_token'], $data['refresh_token'], $expiresAt, $data['scope'], $refreshTokenExpireAt);
     }
 
     /**

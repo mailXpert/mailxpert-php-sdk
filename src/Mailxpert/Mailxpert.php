@@ -12,6 +12,11 @@ use Mailxpert\Authentication\OAuth2Client;
 use Mailxpert\Exceptions\MailxpertSDKException;
 use Mailxpert\Helpers\MailxpertLoginHelper;
 
+/**
+ * Class Mailxpert
+ *
+ * @package Mailxpert
+ */
 class Mailxpert
 {
     /**

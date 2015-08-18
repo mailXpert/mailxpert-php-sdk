@@ -20,9 +20,14 @@ class AccessToken
     private $refreshToken;
 
     /**
-     * @var string
+     * @var int
      */
     private $expiresAt;
+
+    /**
+     * @var string
+     */
+    private $refreshTokenExpiresAt;
 
     /**
      * @var string
@@ -36,12 +41,14 @@ class AccessToken
      * @param string      $refreshToken
      * @param string      $expiresAt
      * @param string|null $scope
+     * @param int         $refreshTokenExpireAt
      */
-    public function __construct($accessToken, $refreshToken, $expiresAt, $scope = null)
+    public function __construct($accessToken, $refreshToken, $expiresAt, $scope = null, $refreshTokenExpireAt = 0)
     {
         $this->accessToken = $accessToken;
         $this->refreshToken = $refreshToken;
         $this->expiresAt = $expiresAt;
+        $this->refreshTokenExpiresAt = $refreshTokenExpireAt;
         $this->scope = $scope;
     }
 
@@ -70,11 +77,19 @@ class AccessToken
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getExpiresAt()
     {
         return $this->expiresAt;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRefreshTokenExpiresAt()
+    {
+        return $this->refreshTokenExpiresAt;
     }
 
     /**
