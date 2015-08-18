@@ -127,7 +127,7 @@ class OAuth2Client
             $expiresAt = time() + $data['expires_in'];
         }
 
-        return new AccessToken($data['access_token'], $data['refresh_token'], $expiresAt);
+        return new AccessToken($data['access_token'], $data['refresh_token'], $expiresAt, $data['scope']);
     }
 
     /**

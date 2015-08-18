@@ -51,7 +51,7 @@ class MailxpertRequest
     {
         $this->accessToken = $accessToken;
         if ($accessToken instanceof AccessToken) {
-            $this->accessToken = $accessToken->getValue();
+            $this->accessToken = $accessToken->getAccessToken();
         }
 
         if (!is_null($this->accessToken)) {
