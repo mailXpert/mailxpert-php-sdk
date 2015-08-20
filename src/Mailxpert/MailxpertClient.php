@@ -109,11 +109,17 @@ class MailxpertClient
             $url = $this->getAPIUrl() . $url;
         }
 
+        if ($request->getMethod() == 'GET') {
+            $body = http_build_query($request->getParams(), null, '&');
+        } else {
+            $body = json_encode($request->getParams());
+        }
+
         return [
             $url,
             $request->getMethod(),
             $request->getHeaders(),
-            http_build_query($request->getParams(), null, '&')
+            $body
         ];
     }
 }
