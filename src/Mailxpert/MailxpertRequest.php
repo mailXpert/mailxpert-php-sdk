@@ -20,6 +20,7 @@ class MailxpertRequest
     private $endpoint;
     private $params;
     protected $headers = [];
+    private $body;
 
     /**
      * MailxpertRequest constructor.
@@ -29,14 +30,16 @@ class MailxpertRequest
      * @param string             $method
      * @param string             $endpoint
      * @param array              $params
+     * @param string             $body
      */
-    public function __construct(MailxpertApp $app, $accessToken, $method, $endpoint, $params)
+    public function __construct(MailxpertApp $app, $accessToken, $method, $endpoint, $params, $body)
     {
         $this->app = $app;
         $this->setAccessToken($accessToken);
         $this->method = $method;
         $this->endpoint = $endpoint;
         $this->params = $params;
+        $this->body = $body;
     }
 
     /**
@@ -111,4 +114,14 @@ class MailxpertRequest
     {
         return $this->headers;
     }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+
 }

@@ -24,7 +24,7 @@ class ContactListsRequest
 
     public static function post(Mailxpert $mailxpert, $name)
     {
-        $response = $mailxpert->sendRequest('POST', 'contact_lists', ['name' => $name]);
+        $response = $mailxpert->sendRequest('POST', 'contact_lists', [], null, json_encode(['name' => $name]));
 
         if (!$response->getHeader('Location')) {
             throw new MailxpertSDKException('An error occured during the Contact list creation.');

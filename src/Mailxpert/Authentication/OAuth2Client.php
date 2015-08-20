@@ -145,11 +145,7 @@ class OAuth2Client
         $params += $this->getClientParams();
 
         $this->lastRequest = new MailxpertRequest(
-            $this->app,
-            null, // ACCESS TOKEN
-            'GET',
-            $this->baseAuthorizationUrl . $endpoint,
-            $params
+            $this->app, null, 'GET', $this->baseAuthorizationUrl . $endpoint, $params, null
         );
 
 

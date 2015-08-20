@@ -120,10 +120,9 @@ class Contact
      * @param string $hash
      * @param string $email
      */
-    public function __construct($id, $hash, $email)
+    public function __construct($email, $id = null)
     {
         $this->id = $id;
-        $this->hash = $hash;
         $this->email = $email;
     }
 
@@ -136,11 +135,27 @@ class Contact
     }
 
     /**
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return string
      */
     public function getHash()
     {
         return $this->hash;
+    }
+
+    /**
+     * @param string $hash
+     */
+    public function setHash($hash)
+    {
+        $this->hash = $hash;
     }
 
     /**
@@ -459,9 +474,9 @@ class Contact
         $this->customValues = $customValues;
     }
 
-    public function toAPI()
+    public function toAPI(array $exclude = [])
     {
-        return [
+        $data = [
             "email" => $this->getEmail(),
             "contact_list_id" => $this->getContactListId(), 
             "language" => $this->getLanguage(), 
@@ -479,5 +494,84 @@ class Contact
             "birthday" => $this->getBirthday(),
             "custom_values" => $this->getCustomValues()
         ];
+
+        foreach ($data as $key => $value) {
+            if (empty($value)) {
+                unset($data[$key]);
+            }
+        }
+
+        foreach ($exclude as $field) {
+            unset($data[$field]);
+        }
+
+        return $data;
+    }
+
+    public function fromAPI($data)
+    {
+        foreach ($data as $key => $value) {
+            switch ($key) {
+                case "hash":
+                    $this->setHash($value);
+                    break;
+                case "contact_list_id":
+                    $this->setContactListId($value);
+                    break;
+                case "language":
+                    $this->setLanguage($value);
+                    break;
+                case "polite_form":
+                    $this->setPoliteForm($value);
+                    break;
+                case "title":
+                    $this->setTitle($value);
+                    break;
+                case "company":
+                    $this->setCompany($value);
+                    break;
+                case "firstname":
+                    $this->setFirsname($value);
+                    break;
+                case "lastname":
+                    $this->setLastname($value);
+                    break;
+                case "address":
+                    $this->setAddress($value);
+                    break;
+                case "address2":
+                    $this->setAddress2($value);
+                    break;
+                case "zip":
+                    $this->setZip($value);
+                    break;
+                case "city":
+                    $this->setCity($value);
+                    break;
+                case "country":
+                    $this->setCountry($value);
+                    break;
+                case "phone":
+                    $this->setPhone($value);
+                    break;
+                case "birthday":
+                    $this->setBirthday($value);
+                    break;
+                case "custom_values":
+                    $this->setCustomValues($value);
+                    break;
+                case "subscribed":
+                    $this->setSubscribed($value);
+                    break;
+                case "unsubscribed":
+                    $this->setUnsubscribed($value);
+                    break;
+                case "created":
+                    $this->setCreated($value);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

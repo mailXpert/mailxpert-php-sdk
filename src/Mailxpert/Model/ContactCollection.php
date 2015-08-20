@@ -17,11 +17,25 @@ class ContactCollection extends ArrayCollection
     {
         if (!$this->exists(
             function ($key, $element) use ($contact) {
-                return $contact->getId() == $element->getId();
+                return $contact->getEmail() == $element->getEmail();
             }
         )
         ) {
             parent::add($contact);
         }
+    }
+
+    /**
+     * @param $email
+     *
+     * @return Contact|null
+     */
+    public function findByEmail($email)
+    {
+        $contacts = $this->filter(function ($element) use ($email) {
+            return $element->getEmail() == $email;
+        });
+
+        return $contacts->first();
     }
 }

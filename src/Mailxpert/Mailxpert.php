@@ -116,23 +116,19 @@ class Mailxpert
         );
     }
 
-    public function sendRequest($method, $endpoint, array $params = [], $accessToken = null)
+    public function sendRequest($method, $endpoint, array $params = [], $accessToken = null, $body = null)
     {
         $accessToken = $accessToken?$accessToken:$this->accessToken;
 
-        $request = $this->request($method, $endpoint, $params, $accessToken);
+        $request = $this->request($method, $endpoint, $params, $accessToken, $body);
 
         return $this->lastResponse = $this->client->sendRequest($request);
     }
 
-    public function request($method, $endpoint, array $params = [], $accessToken = null)
+    public function request($method, $endpoint, array $params = [], $accessToken = null, $body = null)
     {
         return new MailxpertRequest(
-            $this->app,
-            $accessToken,
-            $method,
-            $endpoint,
-            $params
+            $this->app, $accessToken, $method, $endpoint, $params, $body
         );
     }
 
