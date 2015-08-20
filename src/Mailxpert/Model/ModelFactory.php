@@ -13,6 +13,8 @@ class ModelFactory
         switch ($root) {
             case 'contact_lists':
                 return '\\Mailxpert\\Model\\ContactListFactory';
+            case 'contacts':
+                return '\\Mailxpert\\Model\\ContactFactory';
             default:
                 throw new MailxpertSDKException(sprintf('No model found for endpoint %s', $endpoint));
         }

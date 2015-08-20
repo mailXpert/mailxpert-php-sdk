@@ -8,6 +8,20 @@ namespace Mailxpert\Model;
 class ContactListCollection extends ArrayCollection
 {
     /**
+     * @param ContactList $contactList
+     *
+     * @return void
+     */
+    public function add($contactList)
+    {
+        if (!$this->exists(function ($key, $element) use ($contactList) {
+            return $contactList->getId() == $element->getId();
+        })) {
+            parent::add($contactList);
+        }
+    }
+
+    /**
      * @param $name
      *
      * @return self
