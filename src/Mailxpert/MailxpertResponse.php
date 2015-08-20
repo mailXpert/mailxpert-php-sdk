@@ -8,6 +8,7 @@ namespace Mailxpert;
 
 
 use Mailxpert\Exceptions\MailxpertSDKException;
+use Mailxpert\Model\ModelFactory;
 
 class MailxpertResponse
 {
@@ -107,6 +108,11 @@ class MailxpertResponse
         return $this->headers;
     }
 
+    public function getHeader($header)
+    {
+        return isset($this->headers[$header]) ? $this->headers[$header] : null;
+    }
+
     public function decodeBody()
     {
         $this->decodedBody = json_decode($this->body, true);
@@ -133,6 +139,11 @@ class MailxpertResponse
     public function getDecodedBody()
     {
         return $this->decodedBody;
+    }
+
+    public function getMailxpertNode()
+    {
+        return ModelFactory::getNode($this->getRequest()->getEndpoint(), $this->getDecodedBody());
     }
 
     /**
