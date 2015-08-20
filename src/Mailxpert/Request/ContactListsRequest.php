@@ -26,9 +26,7 @@ class ContactListsRequest
     {
         $response = $mailxpert->sendRequest('POST', 'contact_lists', ['name' => $name]);
 
-        $headers = $response->getHeaders();
-
-        if (!isset($headers['Location'])) {
+        if (!$response->getHeader('Location')) {
             throw new MailxpertSDKException('An error occured during the Contact list creation.');
         }
 
