@@ -126,6 +126,12 @@ class Contact
         $this->email = $email;
     }
 
+    function __toString()
+    {
+        return (string) $this->getEmail();
+    }
+
+
     /**
      * @return string
      */
