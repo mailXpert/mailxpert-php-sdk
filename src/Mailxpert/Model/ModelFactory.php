@@ -3,32 +3,43 @@
 namespace Mailxpert\Model;
 
 use Mailxpert\Exceptions\MailxpertSDKException;
+use Mailxpert\MailxpertClient;
 
 class ModelFactory
 {
     public static function getFactory($endpoint)
     {
-        $root = static::getRoot($endpoint);
+        $endpoint = static::cleanEndpoint($endpoint);
 
-        switch ($root) {
-            case 'contact_lists':
+        switch ($endpoint) {
+            case (preg_match('/^(\/|)contact_lists(\/{1}[\w\{\}]*|)$/', $endpoint)?$endpoint:!$endpoint):
                 return '\\Mailxpert\\Model\\ContactListFactory';
-            case 'contacts':
+            case (preg_match('/^(\/|)contacts(\/{1}[\w\{\}]*|)$/', $endpoint)?$endpoint:!$endpoint):
                 return '\\Mailxpert\\Model\\ContactFactory';
+            case (preg_match('/^(\/|)custom_fields(\/{1}[\w\{\}]*|)$/', $endpoint)?$endpoint:!$endpoint):
+                return '\\Mailxpert\\Model\\CustomFieldFactory';
+            case (preg_match('/^(\/|)custom_fields(\/{1}[\w\{\}]*|)\/choices(\/{1}[\w\{\}]*|)$/', $endpoint) ? $endpoint : ! $endpoint):
+                return '\\Mailxpert\\Model\\CustomFieldChoiceFactory';
             default:
                 throw new MailxpertSDKException(sprintf('No model found for endpoint %s', $endpoint));
         }
     }
 
-    private static function getRoot($endpoint)
+    public static function cleanEndpoint($endpoint)
     {
-        while (strpos($endpoint, '/') === 0) {
-            $endpoint = substr($endpoint, 1);
+        if ((strpos($endpoint, 'http') === 0) && (strpos($endpoint, MailxpertClient::API_VERSION) !== false)) {
+            $parts = explode('/', $endpoint);
+
+            if (in_array(MailxpertClient::API_VERSION, $parts)) {
+                while (in_array(MailxpertClient::API_VERSION, $parts)) {
+                    array_shift($parts);
+                }
+            }
+
+            return implode('/', $parts);
         }
 
-        $path = explode('/', $endpoint);
-
-        return array_shift($path);
+        return $endpoint;
     }
 
     public static function getNode($endpoint, $data)
