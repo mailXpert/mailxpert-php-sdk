@@ -115,16 +115,16 @@ class MailxpertResponse
 
     public function decodeBody()
     {
-        $this->decodedBody = json_decode($this->body, true);
+        $decodedBody = json_decode($this->body, true);
 
-        if ($this->decodedBody === null) {
+        if (is_array($decodedBody)) {
+            $this->decodedBody = $decodedBody;
+        } elseif (is_numeric($decodedBody)) {
+            $this->decodedBody = ['id' => $this->decodedBody];
+        } elseif (is_null($decodedBody)) {
             $this->decodedBody = [];
             parse_str($this->body, $this->decodedBody);
-        } elseif (is_numeric($this->decodedBody)) {
-            $this->decodedBody = ['id' => $this->decodedBody];
-        }
-
-        if (!is_array($this->decodedBody)) {
+        } else {
             $this->decodedBody = [];
         }
 
@@ -164,8 +164,6 @@ class MailxpertResponse
 
     public function makeException()
     {
-        //$this->thrownException = MailxpertResponseException::create($this);
-//        $this->throwException = new MailxpertSDKException($this->decodedBody['error']['message'], $this->decodedBody['error']['code']);
         $this->thrownException = new MailxpertSDKException($this->decodedBody['error']);
     }
 }
