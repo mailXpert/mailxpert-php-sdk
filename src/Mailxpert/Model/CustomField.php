@@ -39,6 +39,11 @@ class CustomField
     private $default;
 
     /**
+     * @var CustomFieldChoiceCollection
+     */
+    private $choices;
+
+    /**
      * CustomField constructor.
      *
      * @param string      $alias
@@ -48,9 +53,11 @@ class CustomField
     {
         $this->alias = $alias;
         $this->id = $id;
+
+        $this->choices = new CustomFieldChoiceCollection();
     }
 
-    function __toString()
+    public function __toString()
     {
         return (string) $this->getAlias();
     }
@@ -149,6 +156,22 @@ class CustomField
     public function setDefault($default)
     {
         $this->default = $default;
+    }
+
+    /**
+     * @return CustomFieldChoiceCollection
+     */
+    public function getChoices()
+    {
+        return $this->choices;
+    }
+
+    /**
+     * @param CustomFieldChoiceCollection $choices
+     */
+    public function setChoices(CustomFieldChoiceCollection $choices)
+    {
+        $this->choices = $choices;
     }
 
     public function toAPI()

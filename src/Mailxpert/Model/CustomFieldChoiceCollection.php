@@ -8,4 +8,13 @@ namespace Mailxpert\Model;
 
 class CustomFieldChoiceCollection extends ArrayCollection
 {
+    /**
+     * @param mixed $offset
+     *
+     * @return CustomFieldChoice|null
+     */
+    public function offsetGet($offset)
+    {
+        return parent::offsetGet($offset);
+    }
 }
