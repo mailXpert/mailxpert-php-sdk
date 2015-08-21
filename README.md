@@ -4,6 +4,9 @@ This library allows you to easily manipulate the mailXpert API V2.0.
 
 NOTE: This library is still considered as in alpha release. Although it is meant to be light and there is no plan for big changes in it, be careful if planned to use in production environment.
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mailXpert/mailxpert-php-sdk/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mailXpert/mailxpert-php-sdk/?branch=master)
+
+
 ## Installation
 
 Install this package with composer:
