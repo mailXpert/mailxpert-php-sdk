@@ -6,6 +6,7 @@
 namespace Mailxpert\Request;
 
 
+use Mailxpert\Exceptions\MailxpertSDKException;
 use Mailxpert\Mailxpert;
 
 class ContactsRequest
@@ -32,6 +33,10 @@ class ContactsRequest
     public static function post(Mailxpert $mailxpert, array $params)
     {
         $response = $mailxpert->sendRequest('POST', 'contacts', [], null, json_encode($params));
+
+        if (!$response->getHeader('Location')) {
+            throw new MailxpertSDKException('An error occured during the Contact creation.');
+        }
 
         return $response;
     }
