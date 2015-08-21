@@ -36,7 +36,7 @@ class ContactList
         $this->default = $default;
     }
 
-    function __toString()
+    public function __toString()
     {
         return (string) $this->getName();
     }

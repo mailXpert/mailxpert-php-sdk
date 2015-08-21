@@ -9,6 +9,16 @@ namespace Mailxpert\Model;
 class ContactCollection extends ArrayCollection
 {
     /**
+     * @param mixed $offset
+     *
+     * @return Contact|null
+     */
+    public function offsetGet($offset)
+    {
+        return parent::offsetGet($offset);
+    }
+
+    /**
      * @param Contact $contact
      *
      * @return void

@@ -116,9 +116,8 @@ class Contact
     /**
      * Contact constructor.
      *
-     * @param string $id
-     * @param string $hash
      * @param string $email
+     * @param string $id
      */
     public function __construct($email, $id = null)
     {
@@ -126,7 +125,7 @@ class Contact
         $this->email = $email;
     }
 
-    function __toString()
+    public function __toString()
     {
         return (string) $this->getEmail();
     }
