@@ -47,8 +47,8 @@ class AccessToken
     {
         $this->accessToken = $accessToken;
         $this->refreshToken = $refreshToken;
-        $this->expiresAt = $expiresAt;
-        $this->refreshTokenExpiresAt = $refreshTokenExpireAt;
+        $this->expiresAt = (int) $expiresAt;
+        $this->refreshTokenExpiresAt = (int) $refreshTokenExpireAt;
         $this->scope = $scope;
     }
 
