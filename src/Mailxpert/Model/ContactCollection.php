@@ -43,7 +43,7 @@ class ContactCollection extends ArrayCollection
     public function findByEmail($email)
     {
         $contacts = $this->filter(function ($element) use ($email) {
-            return $element->getEmail() == $email;
+            return $element->getEmail() == strtolower($email);
         });
 
         return $contacts->first();
