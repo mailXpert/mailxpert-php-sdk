@@ -35,10 +35,10 @@ class CustomFieldsChoicesRequest
      */
     public static function post(Mailxpert $mailxpert, $customFieldId, array $params)
     {
-        $response = $mailxpert->sendRequest('GET', sprintf('custom_fields/%s/choices', $customFieldId), $params);
+        $response = $mailxpert->sendRequest('POST', sprintf('custom_fields/%s/choices', $customFieldId), [], null, json_encode($params));
 
         if (!$response->getHeader('Location')) {
-            throw new MailxpertSDKException('An error occured during the Contact creation.');
+            throw new MailxpertSDKException('An error occured during the Contactfield Choice creation.');
         }
 
         return $response;
