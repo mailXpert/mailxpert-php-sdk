@@ -61,6 +61,14 @@ class MailxpertResponse
     }
 
     /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->body;
+    }
+
+    /**
      * @return MailxpertRequest
      */
     public function getRequest()
