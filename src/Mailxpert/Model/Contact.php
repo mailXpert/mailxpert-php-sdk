@@ -34,6 +34,11 @@ class Contact
     private $created;
 
     /**
+     * @var \DateTime
+     */
+    private $updated;
+
+    /**
      * @var string
      */
     private $contactListId;
@@ -66,7 +71,7 @@ class Contact
     /**
      * @var string
      */
-    private $firsname;
+    private $firstname;
 
     /**
      * @var string
@@ -224,6 +229,26 @@ class Contact
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param \DateTime $updated
+     */
+    public function setUpdated($updated)
+    {
+        if (is_string($updated)) {
+            $this->updated = new \DateTime($updated);
+        } else {
+            $this->updated = $updated;
+        }
+    }
+
+    /**
      * @return string
      */
     public function getContactListId()
@@ -322,17 +347,17 @@ class Contact
     /**
      * @return string
      */
-    public function getFirsname()
+    public function getFirstname()
     {
-        return $this->firsname;
+        return $this->firstname;
     }
 
     /**
-     * @param string $firsname
+     * @param string $firstname
      */
-    public function setFirsname($firsname)
+    public function setFirstname($firstname)
     {
-        $this->firsname = $firsname;
+        $this->firstname = $firstname;
     }
 
     /**
@@ -479,6 +504,36 @@ class Contact
         $this->customValues = $customValues;
     }
 
+    /**
+     * @param string      $alias
+     * @param string|null $default
+     *
+     * @return null
+     */
+    public function getCustomValue($alias, $default = null)
+    {
+        if ($this->hasCustomValue($alias)) {
+            return $this->customValues[trim($alias)];
+        } else {
+            return $default;
+        }
+    }
+
+    /**
+     * @param string $alias
+     *
+     * @return bool
+     */
+    public function hasCustomValue($alias)
+    {
+        return isset($this->customValues[trim($alias)]);
+    }
+
+    /**
+     * @param array $exclude
+     *
+     * @return array
+     */
     public function toAPI(array $exclude = [])
     {
         $data = [
@@ -488,7 +543,7 @@ class Contact
             "polite_form" => $this->getPoliteForm(),
             "title" => $this->getTitle(),
             "company" => $this->getCompany(),
-            "firstname" => $this->getFirsname(),
+            "firstname" => $this->getFirstname(),
             "lastname" => $this->getLastname(),
             "address" => $this->getAddress(),
             "address2" => $this->getAddress2(),
@@ -513,7 +568,10 @@ class Contact
         return $data;
     }
 
-    public function fromAPI($data)
+    /**
+     * @param array $data
+     */
+    public function fromAPI(array $data)
     {
         foreach ($data as $key => $value) {
             switch ($key) {
@@ -536,7 +594,7 @@ class Contact
                     $this->setCompany($value);
                     break;
                 case "firstname":
-                    $this->setFirsname($value);
+                    $this->setFirstname($value);
                     break;
                 case "lastname":
                     $this->setLastname($value);
@@ -573,6 +631,9 @@ class Contact
                     break;
                 case "created":
                     $this->setCreated($value);
+                    break;
+                case "updated":
+                    $this->setUpdated($value);
                     break;
                 default:
                     break;
