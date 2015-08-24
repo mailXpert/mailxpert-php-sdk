@@ -127,7 +127,7 @@ class Contact
 
     public function __toString()
     {
-        return (string) $this->getEmail();
+        return (string)$this->getEmail();
     }
 
 
@@ -483,8 +483,8 @@ class Contact
     {
         $data = [
             "email" => $this->getEmail(),
-            "contact_list_id" => $this->getContactListId(), 
-            "language" => $this->getLanguage(), 
+            "contact_list_id" => $this->getContactListId(),
+            "language" => $this->getLanguage(),
             "polite_form" => $this->getPoliteForm(),
             "title" => $this->getTitle(),
             "company" => $this->getCompany(),
@@ -497,7 +497,7 @@ class Contact
             "country" => $this->getCountry(),
             "phone" => $this->getPhone(),
             "birthday" => $this->getBirthday(),
-            "custom_values" => $this->getCustomValues()
+            "custom_values" => $this->getCustomValues(),
         ];
 
         foreach ($data as $key => $value) {

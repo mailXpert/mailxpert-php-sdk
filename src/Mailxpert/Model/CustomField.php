@@ -5,7 +5,10 @@
 
 namespace Mailxpert\Model;
 
-
+/**
+ * Class CustomField
+ * @package Mailxpert\Model
+ */
 class CustomField
 {
     /**
@@ -57,9 +60,12 @@ class CustomField
         $this->choices = new CustomFieldChoiceCollection();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return (string)$this->getAlias();
+        return (string) $this->getAlias();
     }
 
     /**
