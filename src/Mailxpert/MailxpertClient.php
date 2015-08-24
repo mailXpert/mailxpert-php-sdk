@@ -6,11 +6,14 @@
 
 namespace Mailxpert;
 
-
 use Mailxpert\HttpClients\MailxpertCurlHttpClient;
 use Mailxpert\HttpClients\MailxpertHttpClientInterface;
 use Mailxpert\HttpClients\MailxpertStreamHttpClient;
 
+/**
+ * Class MailxpertClient
+ * @package Mailxpert
+ */
 class MailxpertClient
 {
     /**
@@ -38,6 +41,10 @@ class MailxpertClient
      */
     protected $httpClientHandler;
 
+    /**
+     * @param MailxpertHttpClientInterface|null $httpClientHandler
+     * @param string|null                       $apiBaseUrl
+     */
     public function __construct(MailxpertHttpClientInterface $httpClientHandler = null, $apiBaseUrl = null)
     {
         $this->httpClientHandler = $httpClientHandler ?: $this->detectHttpClientHandler();
@@ -73,11 +80,20 @@ class MailxpertClient
         return function_exists('curl_init') ? new MailxpertCurlHttpClient() : new MailxpertStreamHttpClient();
     }
 
+    /**
+     * @return string
+     */
     public function getAPIUrl()
     {
-        return $this->apiBaseUrl . '/' . static::API_VERSION;
+        return $this->apiBaseUrl.'/'.static::API_VERSION;
     }
 
+    /**
+     * @param MailxpertRequest $request
+     *
+     * @return MailxpertResponse
+     * @throws Exceptions\MailxpertSDKException
+     */
     public function sendRequest(MailxpertRequest $request)
     {
         list($url, $method, $headers, $body) = $this->prepareRequestMessage($request);
@@ -105,12 +121,12 @@ class MailxpertClient
         $url = $request->getUrl();
 
         if (strpos($url, 'http') !== 0) {
-            $url = strpos($url, '/') === 0 ? $url : '/' . $url;
-            $url = $this->getAPIUrl() . $url;
+            $url = strpos($url, '/') === 0 ? $url : '/'.$url;
+            $url = $this->getAPIUrl().$url;
         }
 
         if ($request->getParams()) {
-            $url .= http_build_query($request->getParams(), null, '&');
+            $url .= '?'.http_build_query($request->getParams(), null, '&');
         }
 
         $body = $request->getBody();
@@ -119,7 +135,7 @@ class MailxpertClient
             $url,
             $request->getMethod(),
             $request->getHeaders(),
-            $body
+            $body,
         ];
     }
 }
