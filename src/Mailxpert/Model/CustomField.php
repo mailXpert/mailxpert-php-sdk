@@ -184,7 +184,7 @@ class CustomField
         return $this->getChoices()->exists(
             function ($choice) use ($alias) {
 
-                return $this->choice == $alias;
+                return $choice == $alias;
             }
         );
     }
