@@ -59,7 +59,7 @@ class CustomField
 
     public function __toString()
     {
-        return (string) $this->getAlias();
+        return (string)$this->getAlias();
     }
 
     /**
@@ -174,6 +174,24 @@ class CustomField
         $this->choices = $choices;
     }
 
+    /**
+     * @param string $alias
+     *
+     * @return bool
+     */
+    public function hasChoice($alias)
+    {
+        return $this->getChoices()->exists(
+            function ($choice) use ($alias) {
+
+                return $this->choice == $alias;
+            }
+        );
+    }
+
+    /**
+     * @return array
+     */
     public function toAPI()
     {
         return [
@@ -181,11 +199,14 @@ class CustomField
             'type' => $this->getType(),
             'label' => $this->getLabel(),
             'alias' => $this->getAlias(),
-            'default' => $this->getDefault()
+            'default' => $this->getDefault(),
         ];
     }
 
-    public function fromAPI($data)
+    /**
+     * @param array $data
+     */
+    public function fromAPI(array $data)
     {
         foreach ($data as $field => $value) {
             switch ($field) {
