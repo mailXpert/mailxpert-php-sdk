@@ -8,8 +8,9 @@ use Mailxpert\Mailxpert;
 class ContactsRequest
 {
     /**
-     * @param  Mailxpert                     $mailxpert
-     * @param  array                         $params
+     * @param  Mailxpert $mailxpert
+     * @param  array     $params
+     *
      * @return \Mailxpert\MailxpertResponse
      * @throws MailxpertSDKResponseException
      */
@@ -43,9 +44,10 @@ class ContactsRequest
     }
 
     /**
-     * @param  Mailxpert                     $mailxpert
-     * @param  string                        $id
-     * @param  array                         $params
+     * @param  Mailxpert $mailxpert
+     * @param  string    $id
+     * @param  array     $params
+     *
      * @return \Mailxpert\MailxpertResponse
      * @throws MailxpertSDKResponseException
      */
@@ -61,8 +63,9 @@ class ContactsRequest
     }
 
     /**
-     * @param  Mailxpert                     $mailxpert
-     * @param  string                        $id
+     * @param  Mailxpert $mailxpert
+     * @param  string    $id
+     *
      * @return \Mailxpert\MailxpertResponse
      * @throws MailxpertSDKResponseException
      */
