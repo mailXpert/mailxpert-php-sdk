@@ -101,6 +101,14 @@ class MailxpertResponse
     }
 
     /**
+     * @return bool
+     */
+    public function isHttpResponseCodeOK()
+    {
+        return (substr($this->httpResponseCode, 0, 1) == 2);
+    }
+
+    /**
      * @return array
      */
     public function getHeaders()
