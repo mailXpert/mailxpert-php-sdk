@@ -6,7 +6,6 @@
 
 namespace Mailxpert;
 
-
 use Mailxpert\Authentication\AccessToken;
 use Mailxpert\Authentication\OAuth2Client;
 use Mailxpert\Exceptions\MailxpertSDKException;
@@ -64,16 +63,25 @@ class Mailxpert
      */
     protected $accessToken;
 
+    /**
+     * @param array $config
+     *
+     * @throws MailxpertSDKException
+     */
     public function __construct(array $config = [])
     {
         $appId = isset($config['app_id']) ? $config['app_id'] : getenv(static::APP_ID_ENV_NAME);
         if (!$appId) {
-            throw new MailxpertSDKException('Required "app_id" key not supplied in config and could not find fallback environment variable "' . static::APP_ID_ENV_NAME . '"');
+            throw new MailxpertSDKException(
+                'Required "app_id" key not supplied in config and could not find fallback environment variable "'.static::APP_ID_ENV_NAME.'"'
+            );
         }
 
         $appSecret = isset($config['app_secret']) ? $config['app_secret'] : getenv(static::APP_SECRET_ENV_NAME);
         if (!$appSecret) {
-            throw new MailxpertSDKException('Required "app_secret" key not supplied in config and could not find fallback environment variable "' . static::APP_SECRET_ENV_NAME . '"');
+            throw new MailxpertSDKException(
+                'Required "app_secret" key not supplied in config and could not find fallback environment variable "'.static::APP_SECRET_ENV_NAME.'"'
+            );
         }
 
         $this->app = new MailxpertApp($appId, $appSecret);
@@ -109,6 +117,9 @@ class Mailxpert
         return $this->client;
     }
 
+    /**
+     * @return MailxpertLoginHelper
+     */
     public function getLoginHelper()
     {
         return new MailxpertLoginHelper(
@@ -116,20 +127,37 @@ class Mailxpert
         );
     }
 
+    /**
+     * @param string      $method
+     * @param string      $endpoint
+     * @param array       $params
+     * @param string|null $accessToken
+     * @param string|null $body
+     *
+     * @return MailxpertResponse
+     * @throws MailxpertSDKException
+     */
     public function sendRequest($method, $endpoint, array $params = [], $accessToken = null, $body = null)
     {
-        $accessToken = $accessToken?$accessToken:$this->accessToken;
+        $accessToken = $accessToken ? $accessToken : $this->accessToken;
 
         $request = $this->request($method, $endpoint, $params, $accessToken, $body);
 
         return $this->lastResponse = $this->client->sendRequest($request);
     }
 
+    /**
+     * @param string      $method
+     * @param string      $endpoint
+     * @param array       $params
+     * @param string|null $accessToken
+     * @param string|null $body
+     *
+     * @return MailxpertRequest
+     */
     public function request($method, $endpoint, array $params = [], $accessToken = null, $body = null)
     {
-        return new MailxpertRequest(
-            $this->app, $accessToken, $method, $endpoint, $params, $body
-        );
+        return new MailxpertRequest($this->app, $accessToken, $method, $endpoint, $params, $body);
     }
 
     /**

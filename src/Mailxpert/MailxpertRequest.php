@@ -6,9 +6,12 @@
 
 namespace Mailxpert;
 
-
 use Mailxpert\Authentication\AccessToken;
 
+/**
+ * Class MailxpertRequest
+ * @package Mailxpert
+ */
 class MailxpertRequest
 {
     /**
@@ -50,6 +53,11 @@ class MailxpertRequest
         return $this->app;
     }
 
+    /**
+     * @param AccessToken $accessToken
+     *
+     * @return MailxpertRequest
+     */
     public function setAccessToken($accessToken)
     {
         $this->accessToken = $accessToken;
@@ -58,7 +66,7 @@ class MailxpertRequest
         }
 
         if (!is_null($this->accessToken)) {
-            $this->headers['Authorization'] = 'Bearer ' . $this->accessToken;
+            $this->headers['Authorization'] = 'Bearer '.$this->accessToken;
         }
 
         return $this;
@@ -96,12 +104,15 @@ class MailxpertRequest
         return $this->params;
     }
 
+    /**
+     * @return string
+     */
     public function getUrl()
     {
         $url = $this->endpoint;
 
         if ($this->getMethod() !== 'POST') {
-            $url .= '?' . http_build_query($this->getParams(), null, '&');
+            $url .= '?'.http_build_query($this->getParams(), null, '&');
         }
 
         return $url;
@@ -122,6 +133,4 @@ class MailxpertRequest
     {
         return $this->body;
     }
-
-
 }
