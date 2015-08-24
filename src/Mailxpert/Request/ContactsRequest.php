@@ -24,8 +24,9 @@ class ContactsRequest
     }
 
     /**
-     * @param  Mailxpert                    $mailxpert
-     * @param  array                        $params
+     * @param  Mailxpert $mailxpert
+     * @param  array     $params
+     *
      * @return \Mailxpert\MailxpertResponse
      * @throws MailxpertSDKException
      */
