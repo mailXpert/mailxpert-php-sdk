@@ -1,6 +1,6 @@
 {
     "name": "mailxpert/php-sdk",
-    "version": "0.0.5",
+    "version": "0.0.7",
     "description": "mailXpert SDK for PHP",
     "keywords": ["mailxpert", "sdk", "php"],
     "type": "library",
@@ -8,12 +8,6 @@
     "homepage": "https://github.com/mailXpert/mailxpert-php-sdk",
     "require": {
         "php": ">=5.4.0"
-    },
-    "require-dev": {
-        "guzzlehttp/guzzle": "^6.0"
-    },
-    "suggest": {
-        "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client"
     },
     "autoload": {
         "psr-4": {"Mailxpert\\": "src/Mailxpert"}
