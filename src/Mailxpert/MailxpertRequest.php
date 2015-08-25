@@ -28,12 +28,12 @@ class MailxpertRequest
     /**
      * MailxpertRequest constructor.
      *
-     * @param MailxpertApp       $app
-     * @param AccessToken|string $accessToken
-     * @param string             $method
-     * @param string             $endpoint
-     * @param array              $params
-     * @param string             $body
+     * @param MailxpertApp            $app
+     * @param AccessToken|string|null $accessToken
+     * @param string                  $method
+     * @param string                  $endpoint
+     * @param array                   $params
+     * @param string                  $body
      */
     public function __construct(MailxpertApp $app, $accessToken, $method, $endpoint, $params, $body)
     {
@@ -54,7 +54,7 @@ class MailxpertRequest
     }
 
     /**
-     * @param AccessToken $accessToken
+     * @param AccessToken|string|null $accessToken
      *
      * @return MailxpertRequest
      */

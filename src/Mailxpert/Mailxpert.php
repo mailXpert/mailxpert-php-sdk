@@ -150,7 +150,7 @@ class Mailxpert
      * @param string      $method
      * @param string      $endpoint
      * @param array       $params
-     * @param string|null $accessToken
+     * @param AccessToken|string|null $accessToken
      * @param string|null $body
      *
      * @return MailxpertRequest

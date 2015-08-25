@@ -32,7 +32,7 @@ class MailxpertClient
     const DEFAULT_REQUEST_TIMEOUT = 60;
 
     /**
-     * @var null
+     * @var string|null
      */
     protected $apiBaseUrl;
 

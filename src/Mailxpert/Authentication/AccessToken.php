@@ -25,7 +25,7 @@ class AccessToken
     private $expiresAt;
 
     /**
-     * @var string
+     * @var int
      */
     private $refreshTokenExpiresAt;
 
@@ -39,7 +39,7 @@ class AccessToken
      *
      * @param string      $accessToken
      * @param string      $refreshToken
-     * @param string      $expiresAt
+     * @param int         $expiresAt
      * @param string|null $scope
      * @param int         $refreshTokenExpireAt
      */
