@@ -5,13 +5,16 @@
 
 namespace Mailxpert\Model;
 
-
 use Mailxpert\Exceptions\MailxpertSDKException;
 
+/**
+ * Class ContactFactory
+ * @package Mailxpert\Model
+ */
 class ContactFactory extends Factory
 {
     /**
-     * @param $data
+     * @param mixed $data
      *
      * @return Contact|ContactCollection
      * @throws MailxpertSDKException

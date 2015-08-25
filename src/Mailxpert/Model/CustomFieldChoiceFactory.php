@@ -5,11 +5,14 @@
 
 namespace Mailxpert\Model;
 
-
+/**
+ * Class CustomFieldChoiceFactory
+ * @package Mailxpert\Model
+ */
 class CustomFieldChoiceFactory extends Factory
 {
     /**
-     * @param $data
+     * @param mixed $data
      *
      * @return CustomFieldChoice|CustomFieldChoiceCollection
      * @throws \Mailxpert\Exceptions\MailxpertSDKException
@@ -48,5 +51,4 @@ class CustomFieldChoiceFactory extends Factory
 
         return $customFieldChoice;
     }
-
 }

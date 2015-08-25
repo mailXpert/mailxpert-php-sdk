@@ -6,7 +6,10 @@
 
 namespace Mailxpert;
 
-
+/**
+ * Class MailxpertApp
+ * @package Mailxpert
+ */
 class MailxpertApp
 {
     /**

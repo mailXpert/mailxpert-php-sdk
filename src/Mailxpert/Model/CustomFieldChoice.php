@@ -5,7 +5,10 @@
 
 namespace Mailxpert\Model;
 
-
+/**
+ * Class CustomFieldChoice
+ * @package Mailxpert\Model
+ */
 class CustomFieldChoice
 {
     /**
@@ -133,18 +136,21 @@ class CustomFieldChoice
         $this->checked = $checked;
     }
 
+    /**
+     * @return array
+     */
     public function toAPI()
     {
         return [
             'label' => $this->getLabel(),
             'alias' => $this->getAlias(),
             'position' => $this->getPosition(),
-            'checked' => ($this->isChecked()) ? 'true' : 'false'
+            'checked' => ($this->isChecked()) ? 'true' : 'false',
         ];
     }
 
     /**
-     * @param $data
+     * @param array $data
      */
     public function fromAPI($data)
     {
@@ -165,6 +171,4 @@ class CustomFieldChoice
             }
         }
     }
-
-
 }

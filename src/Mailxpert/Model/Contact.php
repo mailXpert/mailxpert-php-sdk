@@ -5,7 +5,10 @@
 
 namespace Mailxpert\Model;
 
-
+/**
+ * Class Contact
+ * @package Mailxpert\Model
+ */
 class Contact
 {
     /**
@@ -130,9 +133,12 @@ class Contact
         $this->email = $email;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return (string)$this->getEmail();
+        return (string) $this->getEmail();
     }
 
 

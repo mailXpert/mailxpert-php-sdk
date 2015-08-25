@@ -5,13 +5,16 @@
 
 namespace Mailxpert\Model;
 
-
 use Mailxpert\Exceptions\MailxpertSDKException;
 
+/**
+ * Class Factory
+ * @package Mailxpert\Model
+ */
 abstract class Factory implements FactoryInterface
 {
     /**
-     * @param $data
+     * @param mixed $data
      *
      * @return mixed
      * @throws MailxpertSDKException
@@ -40,7 +43,8 @@ abstract class Factory implements FactoryInterface
      * @return mixed
      * @throws MailxpertSDKException
      */
-    protected static function buildCollection($data) {
+    protected static function buildCollection($data)
+    {
         throw new MailxpertSDKException('Method not implemented');
     }
 
@@ -52,7 +56,8 @@ abstract class Factory implements FactoryInterface
      * @return mixed
      * @throws MailxpertSDKException
      */
-    protected static function buildElement($data) {
+    protected static function buildElement($data)
+    {
         throw new MailxpertSDKException('Method not implemented');
     }
 }

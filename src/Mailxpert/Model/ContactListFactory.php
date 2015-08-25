@@ -10,7 +10,7 @@ use Mailxpert\Exceptions\MailxpertSDKException;
 class ContactListFactory extends Factory
 {
     /**
-     * @param $data
+     * @param mixed $data
      *
      * @return ContactList|ContactListCollection
      * @throws MailxpertSDKException
@@ -30,12 +30,14 @@ class ContactListFactory extends Factory
         $contactLists = new ContactListCollection();
 
         foreach ($data as $contactListData) {
-
             $contactList = static::buildElement($contactListData);
 
-            if (!$contactLists->exists(function ($key, $element) use ($contactList) {
-                return $contactList->getId() == $element->getId();
-            })) {
+            if (!$contactLists->exists(
+                function ($key, ContactList $element) use ($contactList) {
+                    return $contactList->getId() == $element->getId();
+                }
+            )
+            ) {
                 $contactLists->add($contactList);
             }
         }

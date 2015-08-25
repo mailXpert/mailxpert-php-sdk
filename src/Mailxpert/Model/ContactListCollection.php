@@ -24,25 +24,35 @@ class ContactListCollection extends ArrayCollection
      */
     public function add($contactList)
     {
-        if (!$this->exists(function ($key, $element) use ($contactList) {
-            return $contactList->getId() == $element->getId();
-        })) {
+        if (!$this->exists(
+            function ($key, ContactList $element) use ($contactList) {
+                return $contactList->getId() == $element->getId();
+            }
+        )
+        ) {
             parent::add($contactList);
         }
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return self
      */
     public function findByName($name)
     {
-        return $this->filter(function ($element) use ($name) {
-           return $element->getName() == $name;
-        });
+        return $this->filter(
+            function (ContactList $element) use ($name) {
+                return $element->getName() == $name;
+            }
+        );
     }
 
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     */
     public function findOneByName($name)
     {
         $elements = $this->findByName($name);

@@ -5,7 +5,10 @@
 
 namespace Mailxpert\Model;
 
-
+/**
+ * Class ContactCollection
+ * @package Mailxpert\Model
+ */
 class ContactCollection extends ArrayCollection
 {
     /**
@@ -26,7 +29,7 @@ class ContactCollection extends ArrayCollection
     public function add($contact)
     {
         if (!$this->exists(
-            function ($key, $element) use ($contact) {
+            function ($key, Contact $element) use ($contact) {
                 return $contact->getEmail() == $element->getEmail();
             }
         )
@@ -36,13 +39,13 @@ class ContactCollection extends ArrayCollection
     }
 
     /**
-     * @param $email
+     * @param string $email
      *
      * @return Contact|null
      */
     public function findByEmail($email)
     {
-        $contacts = $this->filter(function ($element) use ($email) {
+        $contacts = $this->filter(function (Contact $element) use ($email) {
             return $element->getEmail() == strtolower($email);
         });
 

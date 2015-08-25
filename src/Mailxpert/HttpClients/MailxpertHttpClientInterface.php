@@ -6,7 +6,10 @@
 
 namespace Mailxpert\HttpClients;
 
-
+/**
+ * Interface MailxpertHttpClientInterface
+ * @package Mailxpert\HttpClients
+ */
 interface MailxpertHttpClientInterface
 {
     /**

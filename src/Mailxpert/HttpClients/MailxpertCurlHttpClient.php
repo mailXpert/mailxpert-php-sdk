@@ -6,10 +6,13 @@
 
 namespace Mailxpert\HttpClients;
 
-
 use Mailxpert\Exceptions\MailxpertSDKException;
 use Mailxpert\Http\RawResponse;
 
+/**
+ * Class MailxpertCurlHttpClient
+ * @package Mailxpert\HttpClients
+ */
 class MailxpertCurlHttpClient implements MailxpertHttpClientInterface
 {
     /**
@@ -43,7 +46,7 @@ class MailxpertCurlHttpClient implements MailxpertHttpClientInterface
     const CONNECTION_ESTABLISHED = "HTTP/1.0 200 Connection established\r\n\r\n";
 
     /**
-     * @param MailxpertCurl|null Procedural curl as object
+     * @param MailxpertCurl|null $mailxpertCurl Procedural curl as object
      */
     public function __construct(MailxpertCurl $mailxpertCurl = null)
     {
@@ -51,7 +54,7 @@ class MailxpertCurlHttpClient implements MailxpertHttpClientInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function send($url, $method, $body, array $headers, $timeOut)
     {
@@ -127,7 +130,7 @@ class MailxpertCurlHttpClient implements MailxpertHttpClientInterface
         $return = [];
 
         foreach ($headers as $key => $value) {
-            $return[] = $key . ': ' . $value;
+            $return[] = $key.': '.$value;
         }
 
         return $return;

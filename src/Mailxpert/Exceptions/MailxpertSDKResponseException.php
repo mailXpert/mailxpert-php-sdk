@@ -14,6 +14,12 @@ class MailxpertSDKResponseException extends MailxpertSDKException
 {
     private $response;
 
+    /**
+     * @param MailxpertResponse $response
+     * @param string            $message
+     * @param int               $code
+     * @param Exception|null    $previous
+     */
     public function __construct(MailxpertResponse $response, $message = "", $code = 0, Exception $previous = null)
     {
         $this->response = $response;

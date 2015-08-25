@@ -5,6 +5,10 @@ namespace Mailxpert\Request;
 use Mailxpert\Exceptions\MailxpertSDKResponseException;
 use Mailxpert\Mailxpert;
 
+/**
+ * Class ContactsRequest
+ * @package Mailxpert\Request
+ */
 class ContactsRequest
 {
     /**

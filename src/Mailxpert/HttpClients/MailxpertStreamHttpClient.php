@@ -6,10 +6,13 @@
 
 namespace Mailxpert\HttpClients;
 
-
 use Mailxpert\Exceptions\MailxpertSDKException;
 use Mailxpert\Http\RawResponse;
 
+/**
+ * Class MailxpertStreamHttpClient
+ * @package Mailxpert\HttpClients
+ */
 class MailxpertStreamHttpClient implements MailxpertHttpClientInterface
 {
     /**
@@ -26,7 +29,7 @@ class MailxpertStreamHttpClient implements MailxpertHttpClientInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function send($url, $method, $body, array $headers, $timeOut)
     {

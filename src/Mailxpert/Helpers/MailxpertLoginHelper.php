@@ -6,10 +6,13 @@
 
 namespace Mailxpert\Helpers;
 
-
 use Mailxpert\Authentication\AccessToken;
 use Mailxpert\Authentication\OAuth2Client;
 
+/**
+ * Class MailxpertLoginHelper
+ * @package Mailxpert\Helpers
+ */
 class MailxpertLoginHelper
 {
     /**
@@ -27,20 +30,20 @@ class MailxpertLoginHelper
         $this->oAuth2Client = $oAuth2Client;
     }
 
+    /**
+     * @param string $redirectUrl
+     * @param array  $scope
+     * @param string $separator
+     *
+     * @return string
+     */
     public function getLoginUrl($redirectUrl, array $scope = [], $separator = '&')
     {
         return $this->makeUrl($redirectUrl, $scope, [], $separator);
     }
 
-    private function makeUrl($redirectUrl, array $scope, array $params, $separator = '&')
-    {
-        $state = null; // TODO: CSRF
-
-        return $this->oAuth2Client->getAuthorizationUrl($redirectUrl, $state, $scope, $params, $separator);
-    }
-
     /**
-     * @param $redirectUrl
+     * @param string $redirectUrl
      *
      * @return \Mailxpert\Authentication\AccessToken
      */
@@ -51,6 +54,12 @@ class MailxpertLoginHelper
         return $this->oAuth2Client->getAccessTokenFromCode($this->getCode(), $redirectUrl);
     }
 
+    /**
+     * @param AccessToken $accessToken
+     * @param string      $redirectUrl
+     *
+     * @return AccessToken
+     */
     public function refreshAccessToken(AccessToken $accessToken, $redirectUrl)
     {
         return $this->oAuth2Client->getAccessTokenFromAccessToken($accessToken, $redirectUrl);
@@ -64,6 +73,21 @@ class MailxpertLoginHelper
     protected function getCode()
     {
         return $this->getInput('code');
+    }
+
+    /**
+     * @param string $redirectUrl
+     * @param array  $scope
+     * @param array  $params
+     * @param string $separator
+     *
+     * @return string
+     */
+    private function makeUrl($redirectUrl, array $scope, array $params, $separator = '&')
+    {
+        $state = null; // TODO: CSRF
+
+        return $this->oAuth2Client->getAuthorizationUrl($redirectUrl, $state, $scope, $params, $separator);
     }
 
     /**

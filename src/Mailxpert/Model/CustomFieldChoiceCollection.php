@@ -5,7 +5,10 @@
 
 namespace Mailxpert\Model;
 
-
+/**
+ * Class CustomFieldChoiceCollection
+ * @package Mailxpert\Model
+ */
 class CustomFieldChoiceCollection extends ArrayCollection
 {
     /**

@@ -22,6 +22,13 @@ class ContactListsRequest
         return $response;
     }
 
+    /**
+     * @param Mailxpert $mailxpert
+     * @param string    $name
+     *
+     * @return \Mailxpert\MailxpertResponse
+     * @throws MailxpertSDKException
+     */
     public static function post(Mailxpert $mailxpert, $name)
     {
         $response = $mailxpert->sendRequest('POST', 'contact_lists', [], null, json_encode(['name' => $name]));

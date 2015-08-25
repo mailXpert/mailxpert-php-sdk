@@ -6,7 +6,10 @@
 
 namespace Mailxpert\Authentication;
 
-
+/**
+ * Class AccessToken
+ * @package Mailxpert\Authentication
+ */
 class AccessToken
 {
     /**

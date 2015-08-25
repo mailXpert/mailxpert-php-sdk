@@ -140,6 +140,8 @@ class ArrayCollection implements Collection
         }
 
         $this->set($offset, $value);
+
+        return true;
     }
 
     /**
@@ -303,7 +305,10 @@ class ArrayCollection implements Collection
             }
         }
 
-        return array(new static($matches), new static($noMatches));
+        return [
+            new static($matches),
+            new static($noMatches),
+        ];
     }
 
     /**
@@ -313,7 +318,7 @@ class ArrayCollection implements Collection
      */
     public function __toString()
     {
-        return __CLASS__ . '@' . spl_object_hash($this);
+        return __CLASS__.'@'.spl_object_hash($this);
     }
 
     /**

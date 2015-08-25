@@ -31,8 +31,8 @@ class MailxpertCurl
     /**
      * Set a curl option
      *
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed  $value
      */
     public function setopt($key, $value)
     {
@@ -82,7 +82,7 @@ class MailxpertCurl
     /**
      * Get info from a curl reference
      *
-     * @param $type
+     * @param string $type
      *
      * @return mixed
      */

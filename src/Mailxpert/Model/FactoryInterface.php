@@ -5,15 +5,18 @@
 
 namespace Mailxpert\Model;
 
-
 use Mailxpert\Exceptions\MailxpertSDKException;
 
+/**
+ * Interface FactoryInterface
+ * @package Mailxpert\Model
+ */
 interface FactoryInterface
 {
     /**
      * Parse data from an API Request
      *
-     * @param $data
+     * @param mixed $data
      *
      * @return mixed
      * @throws MailxpertSDKException

@@ -61,8 +61,8 @@ class OAuth2Client
     /**
      * @param string $redirectUrl
      * @param string $state
-     * @param string $scope
-     * @param string $params
+     * @param array  $scope
+     * @param array  $params
      * @param string $separator
      *
      * @return string

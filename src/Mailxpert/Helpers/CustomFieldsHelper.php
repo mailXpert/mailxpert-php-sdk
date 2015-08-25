@@ -5,14 +5,20 @@
 
 namespace Mailxpert\Helpers;
 
-
 use Mailxpert\Mailxpert;
 use Mailxpert\Model\CustomFieldCollection;
 use Mailxpert\Request\CustomFieldsChoicesRequest;
 
+/**
+ * Class CustomFieldsHelper
+ * @package Mailxpert\Helpers
+ */
 class CustomFieldsHelper
 {
-
+    /**
+     * @param Mailxpert             $mailxpert
+     * @param CustomFieldCollection $customFields
+     */
     public static function loadChoices(Mailxpert $mailxpert, CustomFieldCollection $customFields)
     {
         foreach ($customFields as $customField) {

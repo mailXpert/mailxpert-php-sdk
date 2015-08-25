@@ -5,10 +5,13 @@
 
 namespace Mailxpert\Request;
 
-
 use Mailxpert\Exceptions\MailxpertSDKException;
 use Mailxpert\Mailxpert;
 
+/**
+ * Class CustomFieldsChoicesRequest
+ * @package Mailxpert\Request
+ */
 class CustomFieldsChoicesRequest
 {
     /**

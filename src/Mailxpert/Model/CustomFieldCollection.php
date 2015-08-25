@@ -5,7 +5,10 @@
 
 namespace Mailxpert\Model;
 
-
+/**
+ * Class CustomFieldCollection
+ * @package Mailxpert\Model
+ */
 class CustomFieldCollection extends ArrayCollection
 {
     /**
@@ -19,19 +22,21 @@ class CustomFieldCollection extends ArrayCollection
     }
 
     /**
-     * @param $alias
+     * @param string $alias
      *
      * @return CustomFieldCollection
      */
     public function findByAlias($alias)
     {
-        return $this->filter(function ($element) use ($alias) {
-           return $element->getAlias() == $alias;
-        });
+        return $this->filter(
+            function (CustomField $element) use ($alias) {
+                return $element->getAlias() == $alias;
+            }
+        );
     }
 
     /**
-     * @param $alias
+     * @param string $alias
      *
      * @return CustomField
      */

@@ -27,7 +27,7 @@ class ContactList
      *
      * @param string $id
      * @param string $name
-     * @param bool  $default
+     * @param bool   $default
      */
     public function __construct($id, $name, $default)
     {
@@ -36,6 +36,9 @@ class ContactList
         $this->default = $default;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return (string) $this->getName();
@@ -66,11 +69,13 @@ class ContactList
         return $this->default;
     }
 
-
+    /**
+     * @return array
+     */
     public function toAPI()
     {
         return [
-            'name' => $this->getName()
+            'name' => $this->getName(),
         ];
     }
 }

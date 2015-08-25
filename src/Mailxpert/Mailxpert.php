@@ -147,11 +147,11 @@ class Mailxpert
     }
 
     /**
-     * @param string      $method
-     * @param string      $endpoint
-     * @param array       $params
+     * @param string                  $method
+     * @param string                  $endpoint
+     * @param array                   $params
      * @param AccessToken|string|null $accessToken
-     * @param string|null $body
+     * @param string|null             $body
      *
      * @return MailxpertRequest
      */
