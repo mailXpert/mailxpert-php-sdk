@@ -6,12 +6,15 @@
 
 namespace Mailxpert\Authentication;
 
-
 use Mailxpert\Exceptions\MailxpertSDKException;
 use Mailxpert\MailxpertApp;
 use Mailxpert\MailxpertClient;
 use Mailxpert\MailxpertRequest;
 
+/**
+ * Class OAuth2Client
+ * @package Mailxpert\Authentication
+ */
 class OAuth2Client
 {
     const BASE_AUTHORIZATION_URL = 'https://v5.mailxpert.ch';
@@ -56,11 +59,11 @@ class OAuth2Client
     }
 
     /**
-     * @param $redirectUrl
-     * @param $state
-     * @param $scope
-     * @param $params
-     * @param $separator
+     * @param string $redirectUrl
+     * @param string $state
+     * @param string $scope
+     * @param string $params
+     * @param string $separator
      *
      * @return string
      */
@@ -70,15 +73,19 @@ class OAuth2Client
             'client_id' => $this->app->getId(),
             'response_type' => 'code',
             'redirect_uri' => $redirectUrl,
-            'scope' => implode(',', $scope)
+            'scope' => implode(',', $scope),
         ];
 
-        return $this->baseAuthorizationUrl . '/oauth/v2/auth?' . http_build_query($params, null, $separator);
+        if ($state != null) {
+            $params['state'] = $state;
+        }
+
+        return $this->baseAuthorizationUrl.'/oauth/v2/auth?'.http_build_query($params, null, $separator);
     }
 
     /**
-     * @param $code
-     * @param $redirectUrl
+     * @param string $code
+     * @param string $redirectUrl
      *
      * @return AccessToken
      * @throws MailxpertSDKException
@@ -88,19 +95,26 @@ class OAuth2Client
         $params = [
             'code' => $code,
             'redirect_uri' => $redirectUrl,
-            'grant_type' => 'authorization_code'
+            'grant_type' => 'authorization_code',
         ];
 
         return $this->requestAccessToken($params);
     }
 
 
+    /**
+     * @param AccessToken $accessToken
+     * @param string      $redirectUrl
+     *
+     * @return AccessToken
+     * @throws MailxpertSDKException
+     */
     public function getAccessTokenFromAccessToken(AccessToken $accessToken, $redirectUrl)
     {
         $params = [
             'refresh_token' => $accessToken->getRefreshToken(),
             'redirect_uri' => $redirectUrl,
-            'grant_type' => 'refresh_token'
+            'grant_type' => 'refresh_token',
         ];
 
         return $this->requestAccessToken($params);
@@ -131,7 +145,13 @@ class OAuth2Client
 
         $refreshTokenExpireAt = time() + static::REFRESH_TOKEN_VALIDITY;
 
-        return new AccessToken($data['access_token'], $data['refresh_token'], $expiresAt, $data['scope'], $refreshTokenExpireAt);
+        return new AccessToken(
+            $data['access_token'],
+            $data['refresh_token'],
+            $expiresAt,
+            $data['scope'],
+            $refreshTokenExpireAt
+        );
     }
 
     /**
@@ -144,10 +164,7 @@ class OAuth2Client
     {
         $params += $this->getClientParams();
 
-        $this->lastRequest = new MailxpertRequest(
-            $this->app, null, 'GET', $this->baseAuthorizationUrl . $endpoint, $params, null
-        );
-
+        $this->lastRequest = new MailxpertRequest($this->app, null, 'GET', $this->baseAuthorizationUrl.$endpoint, $params, null);
 
         return $this->client->sendRequest($this->lastRequest);
     }

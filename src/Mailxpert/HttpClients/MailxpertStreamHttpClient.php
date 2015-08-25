@@ -18,7 +18,7 @@ class MailxpertStreamHttpClient implements MailxpertHttpClientInterface
     protected $mailxpertStream;
 
     /**
-     * @param MailxpertStream|null Procedural stream wrapper as object.
+     * @param MailxpertStream|null $mailxpertStream Procedural stream wrapper as object.
      */
     public function __construct(MailxpertStream $mailxpertStream = null)
     {
@@ -36,7 +36,7 @@ class MailxpertStreamHttpClient implements MailxpertHttpClientInterface
                 'header' => $this->compileHeader($headers),
                 'content' => $body,
                 'timeout' => $timeOut,
-                'ignore_errors' => true
+                'ignore_errors' => true,
             ],
         ];
 
@@ -44,7 +44,7 @@ class MailxpertStreamHttpClient implements MailxpertHttpClientInterface
         $rawBody = $this->mailxpertStream->fileGetContents($url);
         $rawHeaders = $this->mailxpertStream->getResponseHeaders();
 
-        if ($rawBody === false || !$rawHeaders) {
+        if ($rawBody === false || empty($rawHeaders)) {
             throw new MailxpertSDKException('Stream returned an empty response', 660);
         }
 
@@ -64,7 +64,7 @@ class MailxpertStreamHttpClient implements MailxpertHttpClientInterface
     {
         $header = [];
         foreach ($headers as $k => $v) {
-            $header[] = $k . ': ' . $v;
+            $header[] = $k.': '.$v;
         }
 
         return implode("\r\n", $header);
