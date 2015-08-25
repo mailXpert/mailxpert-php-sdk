@@ -505,6 +505,15 @@ class Contact
     }
 
     /**
+     * @param string $alias
+     * @param string $value
+     */
+    public function setCustomValue($alias, $value)
+    {
+        $this->customValues[trim($alias)] = $value;
+    }
+
+    /**
      * @param string      $alias
      * @param string|null $default
      *
@@ -531,10 +540,11 @@ class Contact
 
     /**
      * @param array $exclude
+     * @param bool  $clean
      *
      * @return array
      */
-    public function toAPI(array $exclude = [])
+    public function toAPI(array $exclude = [], $clean = true)
     {
         $data = [
             "email" => $this->getEmail(),
@@ -555,9 +565,11 @@ class Contact
             "custom_values" => $this->getCustomValues(),
         ];
 
-        foreach ($data as $key => $value) {
-            if (empty($value)) {
-                unset($data[$key]);
+        if ($clean) {
+            foreach ($data as $key => $value) {
+                if (empty($value)) {
+                    unset($data[$key]);
+                }
             }
         }
 
