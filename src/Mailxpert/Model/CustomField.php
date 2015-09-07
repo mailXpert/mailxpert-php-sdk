@@ -196,17 +196,33 @@ class CustomField
     }
 
     /**
+     * @param array $exclude
+     * @param bool $clean
      * @return array
      */
-    public function toAPI()
+    public function toAPI(array $exclude = [], $clean = true)
     {
-        return [
+        $data = [
             'contact_list_id' => $this->getContactListId(),
             'type' => $this->getType(),
             'label' => $this->getLabel(),
             'alias' => $this->getAlias(),
             'default' => $this->getDefault(),
         ];
+
+        if ($clean) {
+            foreach ($data as $key => $value) {
+                if (empty($value)) {
+                    unset($data[$key]);
+                }
+            }
+        }
+
+        foreach ($exclude as $field) {
+            unset($data[$field]);
+        }
+
+        return $data;
     }
 
     /**

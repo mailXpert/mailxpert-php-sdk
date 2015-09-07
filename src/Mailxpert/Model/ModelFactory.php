@@ -26,6 +26,8 @@ class ModelFactory
                 return '\\Mailxpert\\Model\\ContactListFactory';
             case (preg_match('/^(\/|)contacts(\/{1}[\w\{\}]*|)$/', $endpoint) ? $endpoint : !$endpoint):
                 return '\\Mailxpert\\Model\\ContactFactory';
+            case (preg_match('/^(\/|)segments(\/{1}[\w\{\}]*|)$/', $endpoint) ? $endpoint : !$endpoint):
+                return '\\Mailxpert\\Model\\SegmentFactory';
             case (preg_match('/^(\/|)custom_fields(\/{1}[\w\{\}]*|)$/', $endpoint) ? $endpoint : !$endpoint):
                 return '\\Mailxpert\\Model\\CustomFieldFactory';
             case (preg_match(
