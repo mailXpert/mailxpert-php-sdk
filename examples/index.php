@@ -26,6 +26,9 @@ if (isset($_SESSION['access_token'])) {
 $page = isset($_GET['p'])?$_GET['p']:'';
 
 switch ($page) {
+    case 'cp-customers':
+        require('cp-customers.php');
+        break;
     case 'contactlists':
         require('contactlists.php');
         break;

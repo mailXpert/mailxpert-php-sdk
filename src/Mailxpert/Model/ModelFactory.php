@@ -30,11 +30,10 @@ class ModelFactory
                 return '\\Mailxpert\\Model\\SegmentFactory';
             case (preg_match('/^(\/|)custom_fields(\/{1}[\w\{\}]*|)$/', $endpoint) ? $endpoint : !$endpoint):
                 return '\\Mailxpert\\Model\\CustomFieldFactory';
-            case (preg_match(
-                '/^(\/|)custom_fields(\/{1}[\w\{\}]*|)\/choices(\/{1}[\w\{\}]*|)$/',
-                $endpoint
-            ) ? $endpoint : !$endpoint):
+            case (preg_match( '/^(\/|)custom_fields(\/{1}[\w\{\}]*|)\/choices(\/{1}[\w\{\}]*|)$/', $endpoint) ? $endpoint : !$endpoint):
                 return '\\Mailxpert\\Model\\CustomFieldChoiceFactory';
+            case (preg_match('/^(\/|)cp\/customers(\/{1}[\w\{\}]*|)$/', $endpoint) ? $endpoint : !$endpoint):
+                return '\\Mailxpert\\Model\\CP\\CustomerFactory';
             default:
                 throw new MailxpertSDKException(sprintf('No model found for endpoint %s', $endpoint));
         }
