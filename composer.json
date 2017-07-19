@@ -1,6 +1,5 @@
 {
     "name": "mailxpert/php-sdk",
-    "version": "0.0.7",
     "description": "mailXpert SDK for PHP",
     "keywords": ["mailxpert", "sdk", "php"],
     "type": "library",
