@@ -11,6 +11,14 @@ namespace Mailxpert\Model;
  */
 class Contact
 {
+    const POLITE_FORM_FORMAL = 'formal';
+    const POLITE_FORM_INFORMAL = 'informal';
+
+    const TITLE_MALE = 'male';
+    const TITLE_FEMALE = 'female';
+    const TITLE_COMPANY = 'company';
+    const TITLE_FAMILY = 'family';
+
     /**
      * @var string
      */

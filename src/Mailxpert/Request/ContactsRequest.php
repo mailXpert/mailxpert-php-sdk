@@ -28,6 +28,24 @@ class ContactsRequest
 
         return $response;
     }
+    /**
+     * @param  Mailxpert $mailxpert
+     * @param  int    $id
+     * @param  array     $params
+     *
+     * @return \Mailxpert\MailxpertResponse
+     * @throws MailxpertSDKResponseException
+     */
+    public static function getOne(Mailxpert $mailxpert, $id, array $params = [])
+    {
+        $response = $mailxpert->sendRequest('GET', sprintf('contacts/%d', $id), $params);
+
+        if (!$response->isHttpResponseCodeOK()) {
+            throw new MailxpertSDKResponseException($response, 'An error occured during receiving Contacts.');
+        }
+
+        return $response;
+    }
 
     /**
      * @param  Mailxpert $mailxpert
@@ -39,6 +57,24 @@ class ContactsRequest
     public static function post(Mailxpert $mailxpert, array $params)
     {
         $response = $mailxpert->sendRequest('POST', 'contacts', [], null, json_encode($params));
+
+        if (!$response->isHttpResponseCodeOK()) {
+            throw new MailxpertSDKResponseException($response, 'An error occured during the Contact creation.');
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param  Mailxpert $mailxpert
+     * @param  int    $id
+     *
+     * @return \Mailxpert\MailxpertResponse
+     * @throws MailxpertSDKResponseException
+     */
+    public static function subscribe(Mailxpert $mailxpert, $id)
+    {
+        $response = $mailxpert->sendRequest('PATCH', sprintf('contacts/%d/subscribe', $id));
 
         if (!$response->isHttpResponseCodeOK()) {
             throw new MailxpertSDKResponseException($response, 'An error occured during the Contact creation.');
