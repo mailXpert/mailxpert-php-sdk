@@ -39,6 +39,16 @@ class ContactCollection extends ArrayCollection
     }
 
     /**
+     * @return array
+     */
+    public function toAPI()
+    {
+        return array_map(function(Contact $contact) {
+            return $contact->toAPI();
+        }, $this->getValues());
+    }
+
+    /**
      * @param string $email
      *
      * @return Contact|null
