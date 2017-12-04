@@ -118,7 +118,7 @@ class MailxpertClient
 
     private function prepareRequestMessage(MailxpertRequest $request)
     {
-        $url = $request->getUrl();
+        $url = $request->getEndpoint();
 
         if (strpos($url, 'http') !== 0) {
             $url = strpos($url, '/') === 0 ? $url : '/'.$url;
