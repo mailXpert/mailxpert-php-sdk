@@ -42,6 +42,11 @@ class Customer
     private $created;
 
     /**
+     * @var \DateTime
+     */
+    private $lastLogin;
+
+    /**
      * @var Subscription
      */
     private $subscription;
@@ -136,6 +141,22 @@ class Customer
     public function setCreated(\DateTime $created)
     {
         $this->created = $created;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getLastLogin()
+    {
+        return $this->lastLogin;
+    }
+
+    /**
+     * @param \DateTime $lastLogin
+     */
+    public function setLastLogin(\DateTime $lastLogin = null)
+    {
+        $this->lastLogin = $lastLogin;
     }
 
     /**
@@ -247,6 +268,9 @@ class Customer
                     break;
                 case "created":
                     $this->setCreated(new \DateTime($value));
+                    break;
+                case "last_login":
+                    $this->setLastLogin($value ? new \DateTime($value) : null);
                     break;
                 default:
                     break;
