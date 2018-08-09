@@ -10,6 +10,7 @@ use Mailxpert\Authentication\AccessToken;
 use Mailxpert\Authentication\OAuth2Client;
 use Mailxpert\Exceptions\MailxpertSDKException;
 use Mailxpert\Helpers\MailxpertLoginHelper;
+use Mailxpert\HttpClients\MailxpertHttpClientInterface;
 
 /**
  * Class Mailxpert
@@ -90,7 +91,16 @@ class Mailxpert
             $this->apiBaseUrl = $config['api_base_url'];
         }
 
-        $this->client = new MailxpertClient(null, $this->apiBaseUrl);
+        $httpClientHandler = null;
+        if (isset($config['http_client'])) {
+            $httpClientHandler = $config['http_client'];
+
+            if (!$httpClientHandler instanceof MailxpertHttpClientInterface) {
+                throw new MailxpertSDKException('Config "http_client" should be an instance of MailxpertHttpClientInterface');
+            }
+        }
+
+        $this->client = new MailxpertClient($httpClientHandler, $this->apiBaseUrl);
 
         if (isset($config['oauth_base_url'])) {
             $this->oauthBaseUrl = $config['oauth_base_url'];
