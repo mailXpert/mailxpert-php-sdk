@@ -17,7 +17,7 @@ use Mailxpert\MailxpertRequest;
  */
 class OAuth2Client
 {
-    const BASE_AUTHORIZATION_URL = 'https://v5.mailxpert.ch';
+    const BASE_AUTHORIZATION_URL = 'https://app.mailxpert.ch';
 
     const REFRESH_TOKEN_VALIDITY = 31536000; // 365 days
 
