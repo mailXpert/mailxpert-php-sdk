@@ -188,9 +188,8 @@ class CustomField
     public function hasChoice($alias)
     {
         return $this->getChoices()->exists(
-            function ($choice) use ($alias) {
-
-                return $choice == $alias;
+            function ($key, CustomFieldChoice $customFieldChoice) use ($alias) {
+                return $customFieldChoice->getAlias() == $alias;
             }
         );
     }

@@ -130,11 +130,29 @@ class MailxpertResponse
     /**
      * @param string $header
      *
-     * @return mixed
+     * @return string|null
      */
     public function getHeader($header)
     {
         return isset($this->headers[$header]) ? $this->headers[$header] : null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->getHeader('Location');
+    }
+
+    /**
+     * @return int
+     */
+    public function getLocationId()
+    {
+        preg_match('/\/(\d+)$/', $this->getLocation(), $matches);
+
+        return (int) $matches[1];
     }
 
     /**
