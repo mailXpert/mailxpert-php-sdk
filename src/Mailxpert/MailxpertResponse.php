@@ -58,7 +58,7 @@ class MailxpertResponse
         $this->request = $request;
         $this->body = $body;
         $this->httpResponseCode = $httpResponseCode;
-        $this->headers = $headers;
+        $this->headers = array_change_key_case($headers, CASE_LOWER);
 
         $this->decodeBody();
     }
@@ -134,6 +134,8 @@ class MailxpertResponse
      */
     public function getHeader($header)
     {
+        $header = strtolower($header);
+
         return isset($this->headers[$header]) ? $this->headers[$header] : null;
     }
 
