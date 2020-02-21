@@ -125,6 +125,11 @@ class Contact
     private $birthday;
 
     /**
+     * @var bool
+     */
+    private $inactive;
+
+    /**
      * @var array
      */
     private $customValues = [];
@@ -503,6 +508,22 @@ class Contact
     }
 
     /**
+     * @return bool
+     */
+    public function getInactive()
+    {
+        return $this->inactive;
+    }
+
+    /**
+     * @param bool $inactive
+     */
+    public function setInactive($inactive)
+    {
+        $this->inactive = $inactive;
+    }
+
+    /**
      * @return array
      */
     public function getCustomValues()
@@ -576,6 +597,7 @@ class Contact
             "country" => $this->getCountry(),
             "phone" => $this->getPhone(),
             "birthday" => $this->getBirthday(),
+            "inactive" => $this->getInactive(),
             "custom_values" => $this->getCustomValues(),
         ];
 
@@ -645,6 +667,9 @@ class Contact
                     break;
                 case "birthday":
                     $this->setBirthday($value);
+                    break;
+                case "inactive":
+                    $this->setInactive($value);
                     break;
                 case "custom_values":
                     $this->setCustomValues($value);
